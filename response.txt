@@ -1,5 +1,5 @@
 {
-'entries' = [
+'entries': [
     'banana': {'date': '12/13/2019', 'quantity': 8, 'calories': 420}
     'carrot': {'date': '08/12/2019', 'quantity': 12, 'calories': 642}
     'grapefruit': {'date': '01/31/2020', 'quantity': 3, 'calories': 825}
