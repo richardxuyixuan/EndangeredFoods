@@ -1,12 +1,12 @@
 {
 'entries': [
-    'banana': {'date': '12/13/2019', 'quantity': 8, 'calories': 420}
-    'carrot': {'date': '08/12/2019', 'quantity': 12, 'calories': 642}
-    'grapefruit': {'date': '01/31/2020', 'quantity': 3, 'calories': 825}
-    'cake': {'date': '05/07/2020', 'quantity': 1, 'calories': 163}
-    'orange': {'date': '11/16/2019', 'quantity': 10, 'calories': 167}
-    'flank_steak': {'date': '11/17/2020', 'quantity': 3, 'calories': 943}
-    'pizza': {'date': '08/26/2020', 'quantity': 1, 'calories': 1230}
-    'noodles': {'date': '09/15/2020', 'quantity': 8, 'calories': 445}
+    {'name': 'banana', 'date': '12/13/2019', 'quantity': 8, 'calories': 420},
+    {'name': 'carrot', 'date': '08/12/2019', 'quantity': 12, 'calories': 642},
+    {'name': 'grapefruit', 'date': '01/31/2020', 'quantity': 3, 'calories': 825},
+    {'name': 'cake', 'date': '05/07/2020', 'quantity': 1, 'calories': 163},
+    {'name': 'orange', 'date': '11/16/2019', 'quantity': 10, 'calories': 167},
+    {'name': 'flank_steak', 'date': '11/17/2020', 'quantity': 3, 'calories': 943},
+    {'name': 'pizza', 'date': '08/26/2020', 'quantity': 1, 'calories': 1230},
+    {'name': 'noodles', 'date': '09/15/2020', 'quantity': 8, 'calories': 445}
  ]
 }

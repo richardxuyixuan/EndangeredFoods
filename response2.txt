@@ -1,17 +1,17 @@
 {
 'entries': [
-    'banana': {'date': '12/13/2020', 'quantity': 8, 'calories': 420}
-    'carrot': {'date': '08/12/2020', 'quantity': 12, 'calories': 642}
-    'grapefruit': {'date': '01/31/2020', 'quantity': 3, 'calories': 825}
-    'cake': {'date': '01/17/2020', 'quantity': 1, 'calories': 163}
-    'orange': {'date': '11/16/2020', 'quantity': 10, 'calories': 167}
-    'flank_steak': {'date': '11/17/2019', 'quantity': 3, 'calories': 943}
-    'pizza': {'date': '08/26/2020', 'quantity': 1, 'calories': 1230}
-    'noodles': {'date': '09/15/2020', 'quantity': 8, 'calories': 445}
-    'cucumber': {'date': '04/02/2020', 'quantity': 5, 'calories': 163}
-    'chicken_nuggets': {'date': '12/16/2021', 'quantity': 25, 'calories': 853}
-    'turnip': {'date': 05/11/2019', 'quantity': 4, 'calories': 313}
-    'onion': {'date': '03/13/2020', 'quantity': 23, 'calories': 226}
-    'potato': {'date': '04/16/2020', 'quantity': 96, 'calories': 635}
+    {'name': 'banana', 'date': '12/13/2020', 'quantity': 8, 'calories': 420}
+    {'name': 'carrot', 'date': '08/12/2020', 'quantity': 12, 'calories': 642}
+    {'name': 'grapefruit', 'date': '01/31/2020', 'quantity': 3, 'calories': 825}
+    {'name': 'cake', 'date': '01/17/2020', 'quantity': 1, 'calories': 163}
+    {'name': 'orange', 'date': '11/16/2020', 'quantity': 10, 'calories': 167}
+    {'name': 'flank_steak', 'date': '11/17/2019', 'quantity': 3, 'calories': 943}
+    {'name': 'pizza', 'date': '08/26/2020', 'quantity': 1, 'calories': 1230}
+    {'name': 'noodles', 'date': '09/15/2020', 'quantity': 8, 'calories': 445}
+    {'name': 'cucumber', 'date': '04/02/2020', 'quantity': 5, 'calories': 163}
+    {'name': 'chicken_nuggets', 'date': '12/16/2021', 'quantity': 25, 'calories': 853}
+    {'name': 'turnip', 'date': 05/11/2019', 'quantity': 4, 'calories': 313}
+    {'name': 'onion', 'date': '03/13/2020', 'quantity': 23, 'calories': 226}
+    {'name': 'potato', 'date': '04/16/2020', 'quantity': 96, 'calories': 635}
  ]
 }
