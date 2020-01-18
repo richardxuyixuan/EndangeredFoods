@@ -1,0 +1,7 @@
+{
+'entries' = [
+    'banana': {'date': '03/13/2020', 'quantity': 8, 'calories': 430}
+    'apple': {'date': '09/11/2021', 'quantity': 12, 'calories': 752}
+    'lettuce': {'date': '02/10/2020', 'quantity': 10, 'calories': 825}    
+ ]
+}
