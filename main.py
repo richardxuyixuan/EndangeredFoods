@@ -4,18 +4,31 @@ from expiryDate import checkExpiries, findExpiryTime
 import json
 
 def readFile():
-    with open('foodData.txt', 'r', encoding="utf-8") as f:
-        foodData = json.load(f)
-    #getFoodData=file.read()
-    #checkIfExpired(getFoodData)
-    #sortAccordingToDate(getFoodData)
-    i=0
-    foodList=[]
-    for x in foodData:
-        foodList+=[[x["name"],x["date"],x["quantity"],x["calories"]]]
-    return(foodList)
+    with open('dataStorage.txt', 'r+', encoding="utf-8") as f:
+        foodList = []
+        for line in f:
+            foodList.append(eval(line))
+        return foodList
 
-foodList = readFile()
+def removeFood(name, quantity):
+    with open('dataStorage.txt', 'r+', encoding="utf-8") as f:
+        foodList = []
+        for line in f:
+            foodList.append(eval(line))
+        for food in foodList:
+            if food[0] == name:
+                newQuant = food[2] - quantity
+                indexPos = foodList.index(food)
+                if newQuant > 0:
+                    foodList[indexPos] = [food[0], food[1], newQuant, food[3]]
+                else:
+                    del foodList[indexPos]
+            else:
+                continue
+    o = open("dataStorage.txt", "w", encoding="utf-8")
+    for food in foodList:
+        o.write(str(food) + "\n")
+
 def addFood(file):
     #[[name, date, quantity, calories]]
     open("dataStorage.txt", "w+", encoding="utf-8")
@@ -46,10 +59,9 @@ def addFood(file):
     for update in currentDataList:
         writing.write(str(update)+"\n")
 
-addFood('response.txt')
-
 
 def expiryList():
+    foodList = readFile() 
     outputDic = {'entries': []}
     for food in foodList:
         if checkExpiries(food[1]):
@@ -59,6 +71,7 @@ def expiryList():
     return(jsonOut)
 
 def limitedTimeFoods():
+    foodList = readFile()
     outputDic = {'entries': []}
     for food in foodList:
         if checkExpiries(food[1]):
