@@ -1,0 +1,7 @@
+This is the json (i think) response for the list of foods that are expired
+{"entries": [{"name": "banana", "date": "12/13/2019", "quantity": 8, "calories": 420}, {"name": "carrot", "date": "08/12/2019", "quantity": 12, "calories": 642}, {"name": "grapefruit", "date": "08/12/2019", "quantity": 3, "calories": 825}, {"name": "orange", "date": "11/16/2019", "quantity": 10, "calories": 167}]}
+
+
+
+This is the json (i think) response for the list of foods about to expire
+{"entries": [{"name": "banana", "timeLeft": "Expired"}, {"name": "carrot", "timeLeft": "Expired"}, {"name": "grapefruit", "timeLeft": "Expired"}, {"name": "cake", "timeLeft": "12"}, {"name": "orange", "timeLeft": "Expired"}, {"name": "flank_steak", "timeLeft": "303"}, {"name": "pizza", "timeLeft": "220"}, {"name": "noodles", "timeLeft": "240"}]}
