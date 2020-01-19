@@ -246,21 +246,35 @@
                         "</div>" +
                         "{{/each}}" +
                         "<\/script>";*/
-                    document.getElementById("main-pane").innerHTML = `<div id=\"placeholder\" >TEST</div>`;
+                    document.getElementById("main-pane").innerHTML = `<div id=\"placeholder\" >TEST</div>` +
+                        '<button id=\'recipes\' onclick=\'get_recipe()\'>Get Recipes</button>';
                     replaceHTMLProductTemplate();
 
                 }
                 function toggle_button(str) {
                     console.log(str);
-                    document.getElementById("food-" + str).style.color = "blue";
+                    document.getElementById("food-" + str).style.color = "RED";
                     for (i = 0; i < data.length; i++) {
                         if (data[i].name == str) {
                             file = data[i];
+                            if (taken[i]) {
+                                taken[i] = false;
+                                for (j = 0; j < responce.length; j++) {
+                                    if (responce[j].name == str) {
+                                        responce.splice(j, 1);
+                                    }
+                                }
+                            } else {
+                                responce.push(file);
+                                taken[i] = true;
+                            }
                         }
                     }
-                    responce.push(file);
-                    console.log(responce);
-                    //TODO REMOVE ON UNTOGGLE
+                }
+
+                function get_recipe() {
+                    recipes = sendResponce();
+                    //TODO GET THE RECIPIES
                 }
 
                 /*function replaceHTMLProductTemplate() {

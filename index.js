@@ -64,6 +64,8 @@ let data = [
 
 let responce = [];
 
+let taken = [];
+
 Handlebars.registerHelper("expire", function(date_arg) {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
@@ -84,7 +86,7 @@ Handlebars.registerHelper("expired", function(date_arg) {
 
     today = mm + "/" + dd + "/" + yyyy;
 
-    if (new Date(date_arg[i].date) > new Date(today)) {
+    if (new Date(date_arg[i].date) <= new Date(today)) {
       new_arr.push(date_arg[i]);
     }
   }
@@ -92,7 +94,18 @@ Handlebars.registerHelper("expired", function(date_arg) {
   return new_arr;
 });
 
-const sendResponce = () => {};
+const sendResponce = () => {
+  //TODO GET REPONCE FROM BACKEND
+  json = JSON.stringify(responce);
+  console.log(json);
+};
+
+const getData = () => {
+  //TODO GET DATA FROM BACKEND
+  for (i = 0; i < data.length; i++) {
+    taken.push(false);
+  }
+};
 
 const replaceHTMLProductTemplate = () => {
   let source = document.getElementById("expired-template").innerHTML;
@@ -101,4 +114,5 @@ const replaceHTMLProductTemplate = () => {
   let html = template(context);
   document.getElementById("placeholder").innerHTML = html;
 };
+getData();
 //replaceHTMLProductTemplate();
