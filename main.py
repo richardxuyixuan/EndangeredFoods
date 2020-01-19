@@ -4,7 +4,7 @@ from expiryDate import checkExpiries, findExpiryTime
 import json
 
 def readFile():
-    with open('foodData.txt', 'r') as f:
+    with open('foodData.txt', 'r', encoding="utf-8") as f:
         foodData = json.load(f)
     #getFoodData=file.read()
     #checkIfExpired(getFoodData)
@@ -12,11 +12,41 @@ def readFile():
     i=0
     foodList=[]
     for x in foodData:
-        foodList+=[[x["Name"],x["Date"],x["Quantity"],x["Calories"]]]
+        foodList+=[[x["name"],x["date"],x["quantity"],x["calories"]]]
     return(foodList)
 
 foodList = readFile()
-print(foodList)
+def addFood(file):
+    #[[name, date, quantity, calories]]
+    currentFile = open("dataStorage.txt", "r", encoding="utf-8")
+    currentDataList = []
+    for entry in currentFile.readlines():
+        finalList = []
+        entryList = entry.split(",")
+        for listPart in entryList:
+            finalList.append(listPart.strip("[]\' \n"))  
+        currentDataList.append(finalList)
+    updateFile = open(str(file), "r", encoding="utf-8")
+    updateData = json.load(updateFile)
+    for food in updateData["entries"]:
+        entry = [food["name"], food["date"], food["quantity"], food["calories"]]
+        terminate = False
+        for listValue in currentDataList:
+            if entry[0] == listValue[0]:
+                terminate = True
+                break
+            else:
+                continue
+        if terminate:
+            continue
+        else:
+            currentDataList.append(entry)
+    writing = open("dataStorage.txt", "w", encoding="utf-8")
+    for update in currentDataList:
+        writing.write(str(update)+"\n")
+
+addFood('response2.txt')
+
 
 def expiryList():
     outputDic = {'entries': []}
@@ -26,9 +56,6 @@ def expiryList():
             outputDic['entries'].append(entryDic)
             jsonOut = json.dumps(outputDic)
     return(jsonOut)
-
-print("expiry List \n\n\n")
-print(expiryList())
 
 def limitedTimeFoods():
     outputDic = {'entries': []}
@@ -40,5 +67,3 @@ def limitedTimeFoods():
         outputDic['entries'].append(entryDic)
         jsonOut = json.dumps(outputDic)
     return(jsonOut)
-print("limited time Foods \n\n\n")
-print(limitedTimeFoods())
