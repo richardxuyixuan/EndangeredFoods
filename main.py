@@ -42,15 +42,13 @@ def addFood(file):
         for listPart in entryList:
             finalList.append(listPart.strip("[]\' \n"))  
         tempDataList.append(finalList)
-        print(currentDataList)
-    updateFile = open(str(file), "r", encoding="utf-8")
+        updateFile = open(str(file), "r", encoding="utf-8")
     updateData = json.load(updateFile)
     for food in updateData["entries"]:
         entry = [food["name"], food["date"], food["quantity"], food["calories"], food["pic"]]
         terminate = False
         for listValue in tempDataList:
             if entry[0] == listValue[0]:
-                print("TRUE")
                 terminate = True
                 break
             else:
