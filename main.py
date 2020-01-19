@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from datetime import datetime
 from expiryDate import checkExpiries, findExpiryTime
 import json
@@ -94,7 +94,15 @@ def limitedTimeFoods():
 
 #ingredients="apples,+pineapple" 
 #I NEED THE INGREDIENTS IN THE ABOVE FORMAT
-def getRecipe(ingredients):
+def getRecipe(clientRequest):
+    ingredients = ""
+    for food in clientRequest:
+        breakpoint()
+        if clientRequest.index(food) == 0:
+            ingredients += str(food)
+        else:
+            ingredients +=  (", + " + str(food))    
+    print(ingredients)
     response = requests.get("https://api.spoonacular.com/recipes/findByIngredients?apiKey=50bc728be7ce4ce2a00c793ff7baa63e&ingredients="+ingredients+"&number=1&ignorePantry=true")
     recipeData=[response.json()[0]['title']]+[response.json()[0]['image']]+[response.json()[0]['usedIngredientCount']]
     recipeDataTheOtherHalf=[]
