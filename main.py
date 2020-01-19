@@ -7,6 +7,7 @@ def readFile():
     with open('dataStorage.txt', 'r+', encoding="utf-8") as f:
         foodList = []
         for line in f:
+            print(foodList)
             foodList.append(eval(line))
         return foodList
 
@@ -70,6 +71,13 @@ def expiryList():
             outputDic['entries'].append(entryDic)
             jsonOut = json.dumps(outputDic)
     return(jsonOut)
+
+def change_dict_to_txt(jsonObject):
+    jsonArray = {"entries": [jsonObject]}
+    with open('json_return_data.txt', 'w', encoding="utf-8") as outfile:
+      json.dump(jsonArray, outfile)
+    addFood('json_return_data.txt')
+    return jsonObject
 
 def limitedTimeFoods():
     foodList = readFile()
