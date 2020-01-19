@@ -32,22 +32,24 @@ def removeFood(name, quantity):
 
 def addFood(file):
     #[[name, date, quantity, calories]]
-    open("dataStorage.txt", "w+", encoding="utf-8")
-    currentFile = open("dataStorage.txt", "r", encoding="utf-8")
+    currentFile = open("dataStorage.txt", "r+", encoding="utf-8")
     currentDataList = []
+    tempDataList = []
     for entry in currentFile.readlines():
         finalList = []
         entryList = entry.split(",")
         for listPart in entryList:
             finalList.append(listPart.strip("[]\' \n"))  
-        currentDataList.append(finalList)
+        tempDataList.append(finalList)
+        print(currentDataList)
     updateFile = open(str(file), "r", encoding="utf-8")
     updateData = json.load(updateFile)
     for food in updateData["entries"]:
         entry = [food["name"], food["date"], food["quantity"], food["calories"], food["pic"]]
         terminate = False
-        for listValue in currentDataList:
+        for listValue in tempDataList:
             if entry[0] == listValue[0]:
+                print("TRUE")
                 terminate = True
                 break
             else:
@@ -56,9 +58,9 @@ def addFood(file):
             continue
         else:
             currentDataList.append(entry)
-    writing = open("dataStorage.txt", "w", encoding="utf-8")
-    for update in currentDataList:
-        writing.write(str(update)+"\n")
+    with open("dataStorage.txt", "a", encoding="utf-8") as myFile:
+        for update in currentDataList:
+            myFile.write(str(update)+"\n")
 
 def expiryList():
     foodList = readFile() 
@@ -81,3 +83,5 @@ def limitedTimeFoods():
         outputDic['entries'].append(entryDic)
         jsonOut = json.dumps(outputDic)
     return(jsonOut)
+
+addFood("response3.txt")
