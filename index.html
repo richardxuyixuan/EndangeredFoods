@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 .w3-bar-block .w3-bar-item {padding:20px}
@@ -20,7 +21,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
       padding: 250px;
       text-align: center;
       color: black;
-      font-size: 40px;
+      font-size: 100px;
       background-image: url(https://static.onecms.io/wp-content/uploads/sites/37/2015/06/16012245/fruits-vegetables-legumes-blue-background-8a6d17df.jpg);
  
     
@@ -31,7 +32,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 
     <body>
     <div class="header">
-      <h1>Endangered Foods</h1>
+      <h1 style= "font-size:5pc; font-weight: 800;"> Endangered Foods</h1>
 
     </div>
 
@@ -45,65 +46,133 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
 <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()"
   class="w3-bar-item w3-button">Close Menu</a>
-  <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Food</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+  <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Current Foods</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">Recipes</a>
 </nav>
 
 <!-- Top menu -->
+
 <div class="w3-top">
-  <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+  <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto;opacity: 0.5;">
     <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-    <div class="w3-center w3-padding-16">My Food</div>
+    <div class="w3-center w3-padding-16"></div>
   </div>
 </div>
   
+
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 
-  <!-- First Photo Grid-->
-  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+  <!-- Almost Expired Food -->
+
+  <hr id="foods">
+
+  <style>
+    .btn {
+      border: none;
+      background-color: inherit;
+      padding: 14px 28px;
+      font-size: 40px;
+      cursor: pointer;
+      display: inline-block;
+    }
+    
+    /* Green */
+    .success {
+      color: green;
+    }
+    
+    .success:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+    
+    
+    
+    /* Red */
+    .danger {
+      color: red;
+    }
+    
+    .danger:hover {
+      background: #f44336;
+      color: white;
+    }
+    
+    
+    </style>
+    </head>
+    <body>
+      
+    
+    <h2>Select the Category</h2>
+    <p style= "font-size: medium;"> Press the green button, to see the foods that may be almost expired.<br></br>  Press the red button to see the foods that have expired  </p>
+    
+    <button class="btn success">Warning: Might be expired soon</button>
+    
+    <button class="btn danger">Danger: Expired </button>
+    
+    
+    </body>
+
+  
+  
+    <!--  Recipes -->
+    <hr id="about">
+   
+    <div>
+<style>
+body {
+  text-align: center;
+
+}
+</style>
+
+
+      <h1> Recipes </h1>
+
+<div class="w3-row-padding w3-padding-16 w3-center" id="food">
     <div class="w3-quarter">
-      <img src="Milk.png" alt="Milk" style="width:60%">
-      <h3>Milk</h3>
-      <p>Milk info</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="Yogurt.jpg" alt="Steak" style="width:100%">
-      <h3>Yogurt</h3>
-      <p>Yogurt Info</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="banana.jpg" alt="Cherries" style="width:100%">
-      <h3>Banana</h3>
-      <p>Banana info:</p>
+
+      <style>
+        * {
+          box-sizing: border-box;
+        
+        }
+        
+        .row {
+          display: flex;
+        }
+        
+        /* Create two equal columns that sits next to each other */
+        .column {
+          flex: 50%;
+          padding: 10px;
+          height: 300px; /* Should be removed. Only for demonstration */
+        }
+        </style>
+        </head>
+        <body>
+        
+        
+        <div class="row">
+          <div class="column" style="background-color:white;">
+            <p><img src="Milk.png" alt="Milk" style="width:100%;"></p=>
+          </div>
+          <div class="column" style="background-color:white; ">
+            <h2>Instruction</h2>
+            <p>List the instructions</p>
+          </div>
+        </div>
+        
+        </body>
+
     
     </div>
-    <div class="w3-quarter">
-      <img src="cheese.jpg" alt="Pasta and Wine" style="width:100%">
-      <h3>Cheese</h3>
-      <p>Cheese info:</p>
+      
+  
     </div>
-  </div>
-  
-
-    
-  </div>
-
-  
-  <hr id="about">
-
-  <!-- About Section -->
-  <div class="w3-container w3-padding-32 w3-center">  
-    <h3>About Us, Endangered Foods</h3><br>
-    <img src="/w3images/chef.jpg" alt="Endagered Foods" class="w3-image" style="display:block;margin:auto" width="800" height="533">
-    <div class="w3-padding-32">
-      <h4><b>I am Who I Am!</b></h4>
-      <p>About</p>
-    </div>
-  </div>
-  <hr>
-  
- 
+      
 
 <!-- End page content -->
 </div>
