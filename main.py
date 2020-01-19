@@ -32,6 +32,7 @@ def removeFood(name, quantity):
     for food in foodList:
         o.write(str(food) + "\n")
 
+
 def addFood(file):
     #[[name, date, quantity, calories]]
     open("dataStorage.txt", "a", encoding="utf-8")
@@ -96,18 +97,17 @@ def limitedTimeFoods():
 #I NEED THE INGREDIENTS IN THE ABOVE FORMAT
 def getRecipe(clientRequest):
     ingredients = ""
-    for food in clientRequest:
-        breakpoint()
-        if clientRequest.index(food) == 0:
+    ingredientList = [clientRequest["name"]]
+    for food in ingredientList:
+        if ingredientList.index(food) == 0:
             ingredients += str(food)
         else:
             ingredients +=  (", + " + str(food))    
-    print(ingredients)
     response = requests.get("https://api.spoonacular.com/recipes/findByIngredients?apiKey=50bc728be7ce4ce2a00c793ff7baa63e&ingredients="+ingredients+"&number=1&ignorePantry=true")
-    recipeData=[response.json()[0]['title']]+[response.json()[0]['image']]+[response.json()[0]['usedIngredientCount']]
+    recipeData={"name": response.json()[0]['title'], "url": response.json()[0]['image'], "quantity": response.json()[0]['usedIngredientCount']}
     recipeDataTheOtherHalf=[]
-    for x in response.json()[0]['usedIngredients']:
-        recipeDataTheOtherHalf+=[x['originalName']]
-    recipeData+=[recipeDataTheOtherHalf]
+    # for x in response.json()[0]['usedIngredients']:
+        # recipeDataTheOtherHalf+=[x['originalName']]
+    # recipeData+=[recipeDataTheOtherHalf]
     return recipeData
 #IT WILL RETURN ['RECIPE NAME','IMAGE',#_OF_INGREDIENTS_USED,['INGREDIENTS1','INGREIDENT2']]

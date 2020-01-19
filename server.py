@@ -1,9 +1,7 @@
 from flask import Flask, request
-from main import expiryList,limitedTimeFoods,change_dict_to_txt,removeFood
+from main import *
 
-app = Flask(__name__,
-            static_url_path='', 
-            static_folder='static',)
+app = Flask(__name__)
 
 # send expiry list
 @app.route('/elist',methods=['POST','GET'])
@@ -18,28 +16,30 @@ def send_ltf_data():
     return ltf
 
 # send addFood list
-@app.route('/returnList',methods=['POST','GET'])
+@app.route('/returnList', methods=['POST','GET'])
 def return_list_data():
+    #e_list = expiryList()
     selected_item_name = request.form.to_dict()
     change_dict_to_txt(selected_item_name)
     return selected_item_name
 
+#Get recipe request
+@app.route('/getRecipe', methods=['POST', 'GET'])
+def send_ingredients():
+    response = request.form.to_dict()
+    recipe = getRecipe(response)
+    print(recipe)
+    return recipe
 
 # send removefood list
 @app.route('/removeList',methods=['POST','GET'])
 def remove_list_data():
+    #e_list = expiryList()
+    print('inside remove list')
     selected_item_name = request.form.to_dict()
-    change_dict_to_txt(selected_item_name)
+    print('form data is', selected_item_name)
+    removeFood(selected_item_name['name'], selected_item_name['quantity'])
     return selected_item_name
-
-# try to remove quantity
-@app.route('/removeQuantity',methods=['POST','GET'])
-def remove_quantity():
-    item_name = request.form.to_dict["name"]
-    item_quantity = request.form.to_dict["number"]
-    removeFood(item_name,item_quantity)
-    print(item_name,item_quantity)
-    return item_quantity
 
 # root page
 @app.route('/')
