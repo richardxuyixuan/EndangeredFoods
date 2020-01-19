@@ -1,7 +1,8 @@
+import json
+import requests
 from flask import Flask
 from datetime import datetime
 from expiryDate import checkExpiries, findExpiryTime
-import json
 
 def readFile():
     with open('dataStorage.txt', 'r+', encoding="utf-8") as f:
@@ -85,3 +86,15 @@ def limitedTimeFoods():
     return(jsonOut)
 
 addFood("response3.txt")
+
+#ingredients="apples,+pineapple" 
+#I NEED THE INGREDIENTS IN THE ABOVE FORMAT
+def getRecipe(ingredients):
+    response = requests.get("https://api.spoonacular.com/recipes/findByIngredients?apiKey=50bc728be7ce4ce2a00c793ff7baa63e&ingredients="+ingredients+"&number=1&ignorePantry=true")
+    recipeData=[response.json()[0]['title']]+[response.json()[0]['image']]+[response.json()[0]['usedIngredientCount']]
+    recipeDataTheOtherHalf=[]
+    for x in response.json()[0]['usedIngredients']:
+        recipeDataTheOtherHalf+=[x['originalName']]
+    recipeData+=[recipeDataTheOtherHalf]
+    return recipeData
+#IT WILL RETURN ['RECIPE NAME','IMAGE',#_OF_INGREDIENTS_USED,['INGREDIENTS1','INGREIDENT2']]
