@@ -6,3 +6,8 @@ def checkExpiries(exDate):
         return(True)
     else:
         return(False)
+
+def findExpiryTime(exDate):
+    datetimeExpiryDate = datetime.strptime(exDate, "%m/%d/%Y")
+    timeDifference = datetimeExpiryDate-datetime.now()
+    return(str(timeDifference.days))
