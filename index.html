@@ -129,9 +129,6 @@
             </body>
 
 
-            <div class="tmeplate" type="text/x-handlers-template">
-
-            </div>
 
             <!--  Recipes -->
             <hr id="about">
@@ -141,6 +138,22 @@
                     body {
                         text-align: center;
 
+                    }
+
+                    #main-pane {
+                        padding: 5px;
+
+                    }
+
+                    .food-info {
+                        width: 150px;
+                        height: 300px;
+                    }
+
+
+                    .btn-food {
+                        width: 150 px;
+                        height: 150px;
                     }
                 </style>
 
@@ -169,8 +182,19 @@
                             }
                         </style>
                         </head>
+
+                        <script id="expired-template" type="text/x-handlebars-template">
+                            {{#each (expired data)}}
+                                <div class="food-info" id="food-{{this.name}}">
+                                    <button class="btn-food" onclick="toggle_button('{{this.name}}')">
+                                        <img src={{this.pic}} alt={{this.name}}/>
+                                        <p>{{this.name}} : ({{this.quantity}})</p>
+                                    </button>
+                                </div>
+                            {{/each}}
+                        </script>
                         <div class="content-pane" id="main-pane">
-                            <div class="placeholder"></div>
+
                         </div>
 
 
@@ -209,19 +233,41 @@
                 function get_expired() {
                     /*document.getElementById("main-pane").innerHTML =
                         "<script id=\"expired-template\" type=\"text/x-handlebars-template\">" +
-                        "{{#each (expired data)}}" +
                         "<div class=\"food-info\" id=\"food-{{this.name}}\">" +
                         "<button onclick=\"toggle_button(\"food-{{this.name}}\")\">" +
                         "<img src={{this.pic}} alt={{this.name}}/>" +
                         "<p>{{this.name}} : ({{this.quantity}})</p>" +
                         "</div>" +
                         "{{/each}}" +
-                        "</script>";*/
+                        "<\/script>";*/
+                    document.getElementById("main-pane").innerHTML = `<div id=\"placeholder\">TEST</div>`;
+                    replaceHTMLProductTemplate();
 
+                }
+                function toggle_button(str) {
+                    console.log(str);
+                    document.getElementById("food-" + str).style.color = "blue";
+                    for (i = 0; i < data.length; i++) {
+                        if (data[i].name == str) {
+                            file = data[i];
+                        }
+                    }
+                    responce.push(file);
+                    console.log(responce);
+                    //TODO REMOVE ON UNTOGGLE
+                }
 
-            }
-
+                /*function replaceHTMLProductTemplate() {
+                    let source = document.getElementById("expired-template").innerHTML;
+                    let template = Handlebars.compile(source);
+                    let context = { data: data };
+                    let html = template(context);
+                    document.getElementById("placeholder").innerHTML = html;
+                }
+                replaceHTMLProductTemplate();*/
             </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+            <script src="index.js"></script>
 
     </body>
 

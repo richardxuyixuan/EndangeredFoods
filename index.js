@@ -62,6 +62,8 @@ let data = [
   }
 ];
 
+let responce = [];
+
 Handlebars.registerHelper("expire", function(date_arg) {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
@@ -71,12 +73,32 @@ Handlebars.registerHelper("expire", function(date_arg) {
   today = mm + "/" + dd + "/" + yyyy;
   return new Date(date_arg.date) <= new Date(today);
 });
+
+Handlebars.registerHelper("expired", function(date_arg) {
+  var new_arr = [];
+  for (i = 0; i < date_arg.length; i++) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + "/" + dd + "/" + yyyy;
+
+    if (new Date(date_arg[i].date) > new Date(today)) {
+      new_arr.push(date_arg[i]);
+    }
+  }
+  console.log(new_arr);
+  return new_arr;
+});
+
+const sendResponce = () => {};
+
 const replaceHTMLProductTemplate = () => {
-  let source = document.getElementById("product-template").innerHTML;
+  let source = document.getElementById("expired-template").innerHTML;
   let template = Handlebars.compile(source);
   let context = { data: data };
   let html = template(context);
-  document.getElementById("content-placeholder").innerHTML = html;
+  document.getElementById("placeholder").innerHTML = html;
 };
-
-replaceHTMLProductTemplate();
+//replaceHTMLProductTemplate();
