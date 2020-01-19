@@ -18,6 +18,7 @@ def readFile():
 foodList = readFile()
 def addFood(file):
     #[[name, date, quantity, calories]]
+    open("dataStorage.txt", "w+", encoding="utf-8")
     currentFile = open("dataStorage.txt", "r", encoding="utf-8")
     currentDataList = []
     for entry in currentFile.readlines():
@@ -45,7 +46,7 @@ def addFood(file):
     for update in currentDataList:
         writing.write(str(update)+"\n")
 
-addFood('response2.txt')
+addFood('response.txt')
 
 
 def expiryList():
