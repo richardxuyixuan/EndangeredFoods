@@ -10,4 +10,7 @@ def checkExpiries(exDate):
 def findExpiryTime(exDate):
     datetimeExpiryDate = datetime.strptime(exDate, "%m/%d/%Y")
     timeDifference = datetimeExpiryDate-datetime.now()
-    return(str(timeDifference.days))
+    if timeDifference.days <= 5:
+        return(str(timeDifference.days))
+    else:
+        return "0"

@@ -8,7 +8,6 @@ def readFile():
     with open('dataStorage.txt', 'r+', encoding="utf-8") as f:
         foodList = []
         for line in f:
-            print(foodList)
             foodList.append(eval(line))
         return foodList
 
@@ -85,13 +84,18 @@ def limitedTimeFoods():
     foodList = readFile()
     outputDic = {'entries': []}
     for food in foodList:
-        if checkExpiries(food[1]):
-            entryDic = {'name': food[0], 'timeLeft': 'Expired'}
+        if (int(findExpiryTime(food[1])) <= 5):
+            if checkExpiries(food[1]):
+                entryDic = {'name': food[0], 'timeLeft': 'Expired'}
+            else:
+                entryDic = {'name': food[0], 'timeLeft': findExpiryTime(food[1])}
         else:
-            entryDic = {'name': food[0], 'timeLeft': findExpiryTime(food[1])}
+            continue
         outputDic['entries'].append(entryDic)
         jsonOut = json.dumps(outputDic)
     return(jsonOut)
+
+print(limitedTimeFoods())
 
 #ingredients="apples,+pineapple" 
 #I NEED THE INGREDIENTS IN THE ABOVE FORMAT
@@ -106,8 +110,5 @@ def getRecipe(clientRequest):
     response = requests.get("https://api.spoonacular.com/recipes/findByIngredients?apiKey=50bc728be7ce4ce2a00c793ff7baa63e&ingredients="+ingredients+"&number=1&ignorePantry=true")
     recipeData={"name": response.json()[0]['title'], "url": response.json()[0]['image'], "quantity": response.json()[0]['usedIngredientCount']}
     recipeDataTheOtherHalf=[]
-    # for x in response.json()[0]['usedIngredients']:
-        # recipeDataTheOtherHalf+=[x['originalName']]
-    # recipeData+=[recipeDataTheOtherHalf]
     return recipeData
 #IT WILL RETURN ['RECIPE NAME','IMAGE',#_OF_INGREDIENTS_USED,['INGREDIENTS1','INGREIDENT2']]
