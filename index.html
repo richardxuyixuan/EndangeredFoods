@@ -186,15 +186,31 @@
                                 height: 300px;
                                 /* Should be removed. Only for demonstration */
                             }
+
+                            .wrap-highlight {
+                                background-color: tomato;
+                            }
                         </style>
                         </head>
 
                         <script id="expired-template" type="text/x-handlebars-template">
                             {{#each (expired data)}}
-                                <div class="food-info" id="food-{{this.name}}" style="width:200px">
-                                    <button class="btn-food" onclick="toggle_button('{{this.name}}')">
+                                <div class="food-info" style="width:200px">
+                                    <button class="btn-food" id="food-{{this.name}}" onclick="toggle_button('{{this.name}}')">
                                         <img src={{this.pic}} alt={{this.name}} style="width:100%"/>
                                         <p>{{this.name}} : ({{this.quantity}})</p>
+                                    </button>
+                                </div>
+                            {{/each}}
+                        </script>
+
+                        <script id="soon-template" type="text/x-handlebars-template">
+                            {{#each (soon data)}}
+                                <div class="food-info" style="width:200px">
+                                    <button class="btn-food"  id="food-{{this.name}}" onclick="toggle_button('{{this.name}}')">
+                                        <img src={{this.pic}} alt={{this.name}} style="width:100%"/>
+                                        <p>{{this.name}} : ({{this.quantity}})</p>
+                                        <p>{{this.calories}} cals</p>
                                     </button>
                                 </div>
                             {{/each}}
@@ -224,7 +240,11 @@
                 }
 
                 function get_soon() {
-                    document.getElementById("main-pane").innerHTML =
+                    taken = [];
+                    for (i = 0; i < data.length; i++) {
+                        taken.push(false);
+                    }
+                    /*document.getElementById("main-pane").innerHTML =
                         "<div class=\"row\">" +
                         "<div class=\"column\" style=\"background-color:white;\">" +
                         "<p><img src=\"Milk.png\" alt=\"Milk\" style=\"width:100%;\"></p>" +
@@ -233,10 +253,17 @@
                         "<h2>Instruction</h2>" +
                         "<p>List the instructions</p>" +
                         "</div>" +
-                        "</div>";
+                        "</div>";*/
+                    document.getElementById("main-pane").innerHTML = `<div id=\"placeholder\" >TEST</div>` +
+                        '<button id=\'recipes\' onclick=\'get_recipe()\'>Get Recipes</button>';
+                    replaceHTMLSoonTemplate();
                 }
 
                 function get_expired() {
+                    taken = [];
+                    for (i = 0; i < data.length; i++) {
+                        taken.push(false);
+                    }
                     /*document.getElementById("main-pane").innerHTML =
                         "<script id=\"expired-template\" type=\"text/x-handlebars-template\">" +
                         "<div class=\"food-info\" id=\"food-{{this.name}}\">" +
@@ -246,14 +273,13 @@
                         "</div>" +
                         "{{/each}}" +
                         "<\/script>";*/
-                    document.getElementById("main-pane").innerHTML = `<div id=\"placeholder\" >TEST</div>` +
-                        '<button id=\'recipes\' onclick=\'get_recipe()\'>Get Recipes</button>';
+                    document.getElementById("main-pane").innerHTML = `<div id=\"placeholder\" >TEST</div>`;
                     replaceHTMLProductTemplate();
 
                 }
                 function toggle_button(str) {
-                    console.log(str);
-                    document.getElementById("food-" + str).style.color = "RED";
+                    document.getElementById("food-" + str).classList.toggle("wrap-highlight");
+
                     for (i = 0; i < data.length; i++) {
                         if (data[i].name == str) {
                             file = data[i];
