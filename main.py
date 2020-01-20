@@ -1,9 +1,9 @@
-from flask import Flask, request
 from datetime import datetime
 from expiryDate import checkExpiries, findExpiryTime
 import json
 import requests
 
+#Reads file, simples
 def readFile():
     with open('dataStorage.txt', 'r+', encoding="utf-8") as f:
         foodList = []
@@ -11,6 +11,7 @@ def readFile():
             foodList.append(eval(line))
         return foodList
 
+#Removes a quantity of food, deletes if quantity <= 0
 def removeFood(name, quantity):
     open("dataStorage.txt", "w", encoding="utf-8")
     with open('dataStorage.txt', 'r+', encoding="utf-8") as f:
@@ -33,23 +34,22 @@ def removeFood(name, quantity):
 
 
 def addFood(file):
-    #[[name, date, quantity, calories]]
+    #Copying the data stored into a list
     open("dataStorage.txt", "a", encoding="utf-8")
     currentFile = open("dataStorage.txt", "r+", encoding="utf-8")
+    finalList = []
     currentDataList = []
-    tempDataList = []
     for entry in currentFile.readlines():
-        finalList = []
-        entryList = entry.split(",")
-        for listPart in entryList:
-            finalList.append(listPart.strip("[]\' \n"))  
-        tempDataList.append(finalList)
+        currentDataList.append(eval(entry))
+
+    #Adding new foods to current list
     updateFile = open(str(file), "r", encoding="utf-8")
     updateData = json.load(updateFile)
     for food in updateData["entries"]:
+        #Preventing duplicates
         entry = [food["name"], food["date"], food["quantity"], food["calories"], food["pic"]]
         terminate = False
-        for listValue in tempDataList:
+        for listValue in currentDataList:
             if entry[0] == listValue[0]:
                 terminate = True
                 break
@@ -58,11 +58,14 @@ def addFood(file):
         if terminate:
             continue
         else:
-            currentDataList.append(entry)
+            finalList.append(entry)
+
+    #Output
     with open("dataStorage.txt", "a", encoding="utf-8") as myFile:
-        for update in currentDataList:
+        for update in finalList:
             myFile.write(str(update)+"\n")
 
+#Returns list of expired food
 def expiryList():
     foodList = readFile() 
     outputDic = {'entries': []}
@@ -73,6 +76,7 @@ def expiryList():
             jsonOut = json.dumps(outputDic)
     return(jsonOut)
 
+#Accepting json request to add specific food object
 def change_dict_to_txt(jsonObject):
     jsonArray = {"entries": [jsonObject]}
     with open('json_return_data.txt', 'w', encoding="utf-8") as outfile:
@@ -80,6 +84,7 @@ def change_dict_to_txt(jsonObject):
     addFood('json_return_data.txt')
     return jsonObject
 
+#Returns list of foods about to expire, and expired foods
 def limitedTimeFoods():
     foodList = readFile()
     outputDic = {'entries': []}
@@ -95,10 +100,7 @@ def limitedTimeFoods():
         jsonOut = json.dumps(outputDic)
     return(jsonOut)
 
-print(limitedTimeFoods())
-
-#ingredients="apples,+pineapple" 
-#I NEED THE INGREDIENTS IN THE ABOVE FORMAT
+#Function that uses spoonacular's API to return a recipe when given a list of food names
 def getRecipe(clientRequest):
     ingredients = ""
     ingredientList = [clientRequest["name"]]
@@ -111,4 +113,3 @@ def getRecipe(clientRequest):
     recipeData={"name": response.json()[0]['title'], "url": response.json()[0]['image'], "quantity": response.json()[0]['usedIngredientCount']}
     recipeDataTheOtherHalf=[]
     return recipeData
-#IT WILL RETURN ['RECIPE NAME','IMAGE',#_OF_INGREDIENTS_USED,['INGREDIENTS1','INGREIDENT2']]
